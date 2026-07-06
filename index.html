@@ -269,6 +269,19 @@
       line-height: 1.45;
     }
 
+    .file-warning {
+      color: var(--danger);
+      display: none;
+      font-size: 13px;
+      font-weight: 750;
+      line-height: 1.45;
+      margin: 0;
+    }
+
+    .file-warning.show {
+      display: block;
+    }
+
     .summary-list {
       display: grid;
       gap: 14px;
@@ -558,8 +571,9 @@
           </div>
           <div class="full">
             <label for="incomeDocs">Upload income proof</label>
-            <input id="incomeDocs" name="incomeDocs" type="file" accept=".pdf,.jpg,.jpeg,.png" multiple>
-            <p class="small">Pay stubs, bank statements, award letters, or tax documents are commonly accepted.</p>
+            <input id="incomeDocs" name="attachment" type="file" accept=".pdf,.jpg,.jpeg,.png" multiple>
+            <p class="small">Pay stubs, bank statements, award letters, or tax documents are commonly accepted. Each file must be under 10MB.</p>
+            <p class="file-warning" id="incomeDocsWarning"></p>
           </div>
         </div>
       </section>
@@ -729,9 +743,10 @@
           <div class="full upload-box">
             <div>
               <label for="idImage">Upload image of ID</label>
-              <p class="small">Use a clear photo of the front of the ID. Accepted formats: JPG, PNG, or PDF.</p>
+              <p class="small">Use a clear photo of the front of the ID. Accepted formats: JPG, PNG, or PDF. File must be under 10MB.</p>
             </div>
-            <input id="idImage" name="idImage" type="file" accept="image/*,.pdf">
+            <input id="idImage" name="attachment2" type="file" accept="image/png,image/jpeg,.pdf">
+            <p class="file-warning" id="idImageWarning"></p>
           </div>
         </div>
       </section>
@@ -818,6 +833,19 @@
     const form = document.querySelector("#applicationForm");
     const status = document.querySelector("#status");
     const applicationSummary = document.querySelector("#applicationSummary");
+    const maxFileSize = 10 * 1024 * 1024;
+    const fileInputs = [
+      {
+        input: document.querySelector("#incomeDocs"),
+        warning: document.querySelector("#incomeDocsWarning"),
+        label: "income proof"
+      },
+      {
+        input: document.querySelector("#idImage"),
+        warning: document.querySelector("#idImageWarning"),
+        label: "ID image"
+      }
+    ];
 
     const labels = {
       firstName: "First name",
@@ -838,7 +866,7 @@
       monthlyIncome: "Gross monthly income",
       employer: "Employer or business name",
       employerPhone: "Employer phone",
-      incomeDocs: "Income proof files",
+      attachment: "Income proof files",
       currentLandlord: "Current landlord name",
       landlordPhone: "Current landlord phone",
       currentRent: "Current monthly rent",
@@ -867,7 +895,7 @@
       idNumber: "ID number",
       idState: "Issuing state or country",
       idExpiration: "ID expiration date",
-      idImage: "ID image file",
+      attachment2: "ID image file",
       referenceName: "Reference name",
       referencePhone: "Reference phone",
       emergencyName: "Emergency contact name",
@@ -879,11 +907,11 @@
     const sections = [
       ["Applicant Information", ["firstName", "lastName", "email", "phone", "currentAddress", "dob", "ssnLast4"]],
       ["Desired Rental", ["moveDate", "rentBudget", "leaseLength", "occupants", "pets", "parking", "occupantRelationships"]],
-      ["Employment & Income", ["employmentStatus", "monthlyIncome", "employer", "employerPhone", "incomeDocs"]],
+      ["Employment & Income", ["employmentStatus", "monthlyIncome", "employer", "employerPhone", "attachment"]],
       ["Rental History", ["currentLandlord", "landlordPhone", "currentRent", "timeAtAddress", "moveReason", "previousLandlord1Name", "previousLandlord1Phone", "previousLandlord1Address", "previousLandlord2Name", "previousLandlord2Phone", "previousLandlord2Address"]],
       ["Vehicles", ["vehicleCount", "vehicle1Year", "vehicle1Make", "vehicle1Model", "vehicle2Year", "vehicle2Make", "vehicle2Model", "additionalVehicles"]],
       ["Screening Questions", ["evicted", "brokenLease", "smoker", "bankruptcy", "screeningDetails"]],
-      ["Identity Verification", ["idType", "idNumber", "idState", "idExpiration", "idImage"]],
+      ["Identity Verification", ["idType", "idNumber", "idState", "idExpiration", "attachment2"]],
       ["References & Emergency Contact", ["referenceName", "referencePhone", "emergencyName", "emergencyPhone"]],
       ["Authorization", ["accurate", "screeningConsent"]]
     ];
@@ -940,7 +968,43 @@
       return { applicantName, body: lines.join("\n") };
     };
 
+    const formatFileSize = (bytes) => `${(bytes / (1024 * 1024)).toFixed(1)}MB`;
+
+    const validateFileInput = ({ input, warning, label }) => {
+      const oversizedFiles = Array.from(input.files).filter((file) => file.size > maxFileSize);
+
+      if (!oversizedFiles.length) {
+        warning.textContent = "";
+        warning.classList.remove("show");
+        input.setCustomValidity("");
+        return true;
+      }
+
+      const fileList = oversizedFiles.map((file) => `${file.name} (${formatFileSize(file.size)})`).join(", ");
+      const message = `Please choose a smaller ${label}. These files are over 10MB: ${fileList}.`;
+      warning.textContent = message;
+      warning.classList.add("show");
+      input.setCustomValidity(message);
+      return false;
+    };
+
+    const validateFileSizes = () => fileInputs.every(validateFileInput);
+
+    fileInputs.forEach((fileInput) => {
+      fileInput.input.addEventListener("change", () => {
+        validateFileInput(fileInput);
+      });
+    });
+
     form.addEventListener("submit", (event) => {
+      if (!validateFileSizes()) {
+        event.preventDefault();
+        form.reportValidity();
+        status.textContent = "One or more uploaded files is over 10MB. Please choose a smaller file before submitting.";
+        status.classList.add("show");
+        return;
+      }
+
       if (!form.checkValidity()) {
         event.preventDefault();
         form.reportValidity();
@@ -956,6 +1020,11 @@
 
     form.addEventListener("reset", () => {
       status.classList.remove("show");
+      fileInputs.forEach(({ input, warning }) => {
+        input.setCustomValidity("");
+        warning.textContent = "";
+        warning.classList.remove("show");
+      });
     });
   </script>
 </body>
