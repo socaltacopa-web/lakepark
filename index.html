@@ -435,34 +435,39 @@
   </header>
 
   <main>
-    <form id="applicationForm">
+    <form id="applicationForm" action="https://formsubmit.co/lakeparkrealty@hotmail.com" method="POST" enctype="multipart/form-data">
+      <input type="hidden" name="_subject" value="New Lake Park Realty Rental Application">
+      <input type="hidden" name="_template" value="table">
+      <input type="hidden" name="_captcha" value="false">
+      <input type="hidden" name="_next" value="https://socaltacopa-web.github.io/lakepark/thanks.html">
+      <input type="hidden" id="applicationSummary" name="Application Summary">
       <section class="section">
         <h2>Applicant Information</h2>
         <p class="section-intro">Basic contact details for the person applying for the property.</p>
         <div class="grid">
           <div>
-            <label for="firstName">First name <span class="required">*</span></label>
-            <input id="firstName" name="firstName" autocomplete="given-name" required>
+            <label for="firstName">First name</label>
+            <input id="firstName" name="firstName" autocomplete="given-name">
           </div>
           <div>
-            <label for="lastName">Last name <span class="required">*</span></label>
-            <input id="lastName" name="lastName" autocomplete="family-name" required>
+            <label for="lastName">Last name</label>
+            <input id="lastName" name="lastName" autocomplete="family-name">
           </div>
           <div>
-            <label for="email">Email <span class="required">*</span></label>
-            <input id="email" name="email" type="email" autocomplete="email" required>
+            <label for="email">Email</label>
+            <input id="email" name="email" type="email" autocomplete="email">
           </div>
           <div>
-            <label for="phone">Phone number <span class="required">*</span></label>
-            <input id="phone" name="phone" type="tel" autocomplete="tel" required>
+            <label for="phone">Phone number</label>
+            <input id="phone" name="phone" type="tel" autocomplete="tel">
           </div>
           <div class="full">
-            <label for="currentAddress">Current address <span class="required">*</span></label>
-            <input id="currentAddress" name="currentAddress" autocomplete="street-address" required>
+            <label for="currentAddress">Current address</label>
+            <input id="currentAddress" name="currentAddress" autocomplete="street-address">
           </div>
           <div>
-            <label for="dob">Date of birth <span class="required">*</span></label>
-            <input id="dob" name="dob" type="date" required>
+            <label for="dob">Date of birth</label>
+            <input id="dob" name="dob" type="date">
           </div>
           <div>
             <label for="ssnLast4">Last 4 digits of SSN</label>
@@ -476,12 +481,12 @@
         <p class="section-intro">Screen for timing, budget, and household fit.</p>
         <div class="grid-3">
           <div>
-            <label for="moveDate">Desired move-in date <span class="required">*</span></label>
-            <input id="moveDate" name="moveDate" type="date" required>
+            <label for="moveDate">Desired move-in date</label>
+            <input id="moveDate" name="moveDate" type="date">
           </div>
           <div>
-            <label for="rentBudget">Monthly rent budget <span class="required">*</span></label>
-            <input id="rentBudget" name="rentBudget" type="number" min="0" step="50" placeholder="$" required>
+            <label for="rentBudget">Monthly rent budget</label>
+            <input id="rentBudget" name="rentBudget" type="number" min="0" step="50" placeholder="$">
           </div>
           <div>
             <label for="leaseLength">Preferred lease length</label>
@@ -494,8 +499,8 @@
             </select>
           </div>
           <div>
-            <label for="occupants">How many people will live there? <span class="required">*</span></label>
-            <input id="occupants" name="occupants" type="number" min="1" required>
+            <label for="occupants">How many people will live there?</label>
+            <input id="occupants" name="occupants" type="number" min="1">
           </div>
           <div>
             <label for="pets">Pets</label>
@@ -517,8 +522,8 @@
             </select>
           </div>
           <div class="full">
-            <label for="occupantRelationships">Names and relationship of each person living there <span class="required">*</span></label>
-            <textarea id="occupantRelationships" name="occupantRelationships" placeholder="Example: Maria Lopez - spouse; Daniel Lopez - child; Ana Ruiz - roommate" required></textarea>
+            <label for="occupantRelationships">Names and relationship of each person living there</label>
+            <textarea id="occupantRelationships" name="occupantRelationships" placeholder="Example: Maria Lopez - spouse; Daniel Lopez - child; Ana Ruiz - roommate"></textarea>
           </div>
         </div>
       </section>
@@ -528,8 +533,8 @@
         <p class="section-intro">Typical screening checks include employment status, income, and employer contact information.</p>
         <div class="grid">
           <div>
-            <label for="employmentStatus">Employment status <span class="required">*</span></label>
-            <select id="employmentStatus" name="employmentStatus" required>
+            <label for="employmentStatus">Employment status</label>
+            <select id="employmentStatus" name="employmentStatus">
               <option value="">Select one</option>
               <option>Employed full-time</option>
               <option>Employed part-time</option>
@@ -540,8 +545,8 @@
             </select>
           </div>
           <div>
-            <label for="monthlyIncome">Gross monthly income <span class="required">*</span></label>
-            <input id="monthlyIncome" name="monthlyIncome" type="number" min="0" step="100" placeholder="$" required>
+            <label for="monthlyIncome">Gross monthly income</label>
+            <input id="monthlyIncome" name="monthlyIncome" type="number" min="0" step="100" placeholder="$">
           </div>
           <div>
             <label for="employer">Employer or business name</label>
@@ -552,8 +557,8 @@
             <input id="employerPhone" name="employerPhone" type="tel">
           </div>
           <div class="full">
-            <label for="incomeDocs">Upload income proof <span class="required">*</span></label>
-            <input id="incomeDocs" name="incomeDocs" type="file" accept=".pdf,.jpg,.jpeg,.png" multiple required>
+            <label for="incomeDocs">Upload income proof</label>
+            <input id="incomeDocs" name="incomeDocs" type="file" accept=".pdf,.jpg,.jpeg,.png" multiple>
             <p class="small">Pay stubs, bank statements, award letters, or tax documents are commonly accepted.</p>
           </div>
         </div>
@@ -621,8 +626,8 @@
         <p class="section-intro">Collect vehicle details for parking, permits, and property records.</p>
         <div class="grid">
           <div>
-            <label for="vehicleCount">How many vehicles do you own? <span class="required">*</span></label>
-            <input id="vehicleCount" name="vehicleCount" type="number" min="0" required>
+            <label for="vehicleCount">How many vehicles do you own?</label>
+            <input id="vehicleCount" name="vehicleCount" type="number" min="0">
           </div>
           <div>
             <label for="vehicle1Year">Vehicle 1 year</label>
@@ -662,28 +667,28 @@
           <div>
             <span class="label">Have you ever been evicted?</span>
             <div class="choice-row">
-              <label class="choice"><input type="radio" name="evicted" value="No" required> No</label>
+              <label class="choice"><input type="radio" name="evicted" value="No"> No</label>
               <label class="choice"><input type="radio" name="evicted" value="Yes"> Yes</label>
             </div>
           </div>
           <div>
             <span class="label">Have you ever broken a lease?</span>
             <div class="choice-row">
-              <label class="choice"><input type="radio" name="brokenLease" value="No" required> No</label>
+              <label class="choice"><input type="radio" name="brokenLease" value="No"> No</label>
               <label class="choice"><input type="radio" name="brokenLease" value="Yes"> Yes</label>
             </div>
           </div>
           <div>
             <span class="label">Do you smoke?</span>
             <div class="choice-row">
-              <label class="choice"><input type="radio" name="smoker" value="No" required> No</label>
+              <label class="choice"><input type="radio" name="smoker" value="No"> No</label>
               <label class="choice"><input type="radio" name="smoker" value="Yes"> Yes</label>
             </div>
           </div>
           <div>
             <span class="label">Have you filed bankruptcy in the last 7 years?</span>
             <div class="choice-row">
-              <label class="choice"><input type="radio" name="bankruptcy" value="No" required> No</label>
+              <label class="choice"><input type="radio" name="bankruptcy" value="No"> No</label>
               <label class="choice"><input type="radio" name="bankruptcy" value="Yes"> Yes</label>
             </div>
           </div>
@@ -699,8 +704,8 @@
         <p class="section-intro">Ask for a government ID number and a clear image of the ID for screening records.</p>
         <div class="grid">
           <div>
-            <label for="idType">ID type <span class="required">*</span></label>
-            <select id="idType" name="idType" required>
+            <label for="idType">ID type</label>
+            <select id="idType" name="idType">
               <option value="">Select one</option>
               <option>Driver license</option>
               <option>State ID</option>
@@ -710,8 +715,8 @@
             </select>
           </div>
           <div>
-            <label for="idNumber">ID number <span class="required">*</span></label>
-            <input id="idNumber" name="idNumber" autocomplete="off" required>
+            <label for="idNumber">ID number</label>
+            <input id="idNumber" name="idNumber" autocomplete="off">
           </div>
           <div>
             <label for="idState">Issuing state or country</label>
@@ -723,10 +728,10 @@
           </div>
           <div class="full upload-box">
             <div>
-              <label for="idImage">Upload image of ID <span class="required">*</span></label>
+              <label for="idImage">Upload image of ID</label>
               <p class="small">Use a clear photo of the front of the ID. Accepted formats: JPG, PNG, or PDF.</p>
             </div>
-            <input id="idImage" name="idImage" type="file" accept="image/*,.pdf" required>
+            <input id="idImage" name="idImage" type="file" accept="image/*,.pdf">
           </div>
         </div>
       </section>
@@ -758,11 +763,11 @@
         <h2>Authorization</h2>
         <p class="section-intro">Confirm the applicant understands the screening process before submitting.</p>
         <label class="consent">
-          <input type="checkbox" name="accurate" required>
+          <input type="checkbox" name="accurate">
           <span>I certify that the information provided is true and complete to the best of my knowledge.</span>
         </label>
         <label class="consent">
-          <input type="checkbox" name="screeningConsent" required>
+          <input type="checkbox" name="screeningConsent">
           <span>I authorize the property owner or manager to verify my rental history, employment, income, identity, credit, and background information as allowed by law.</span>
         </label>
       </section>
@@ -771,7 +776,7 @@
         <button type="submit">Submit Application</button>
         <button class="ghost" type="reset">Clear Form</button>
       </div>
-      <div class="status" id="status" role="status">Your email app should open with a completed application summary addressed to Lake Park Realty. Please attach the uploaded ID and income proof files before sending.</div>
+      <div class="status" id="status" role="status">Sending your application to Lake Park Realty.</div>
     </form>
 
     <aside aria-label="Application checklist">
@@ -812,7 +817,7 @@
   <script>
     const form = document.querySelector("#applicationForm");
     const status = document.querySelector("#status");
-    const recipientEmail = "lakeparkrealty@hotmail.com";
+    const applicationSummary = document.querySelector("#applicationSummary");
 
     const labels = {
       firstName: "First name",
@@ -936,21 +941,17 @@
     };
 
     form.addEventListener("submit", (event) => {
-      event.preventDefault();
-
       if (!form.checkValidity()) {
+        event.preventDefault();
         form.reportValidity();
         return;
       }
 
       const summary = buildApplicationSummary();
-      const subject = `Rental Application - ${summary.applicantName}`;
-      const mailtoLink = `mailto:${recipientEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(summary.body)}`;
+      applicationSummary.value = summary.body;
 
-      window.location.href = mailtoLink;
-
+      status.textContent = "Sending your application to Lake Park Realty.";
       status.classList.add("show");
-      status.scrollIntoView({ behavior: "smooth", block: "center" });
     });
 
     form.addEventListener("reset", () => {
@@ -959,3 +960,4 @@
   </script>
 </body>
 </html>
+
